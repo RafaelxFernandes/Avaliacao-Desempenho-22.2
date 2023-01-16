@@ -6,6 +6,7 @@
 - Para cada plot, explicar como cada eixo foi obtido
 - Explicar detalhadamente/ deduzir como cada cálculo foi realizado
 - Analisar para 10 seeds
+- Acrescentar correlação de Pearson na explicação das seeds
 
 - Otimização:
     - Explicar "cada passo"
