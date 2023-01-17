@@ -25,12 +25,21 @@
     - Explicar para qual fila o número de amostras se refere
     - As métricas tem que ser salvas referente à rodada atual, e não à rodada do cliente
     - Em qual intervalo estão as seeds do Python?
-    - As estatísticas E[N] e E[Nq] não são comentadas. Nas chegadas e términos de serviço os valores das métricas tem que ser calculados
+    - Seeds: "Mesmo..." => próximo é na sequência pseudo-aleatória, e não em valor absoluto
+    - Eventos: "... o tempo de espera..." => deveria ser a rodada atual
+    - Eventos: as estatísticas E[N] e E[Nq] não são comentadas. Nas chegadas e términos de serviço os valores das métricas tem que ser calculados
+    - Método: "todo cliente... sistema" => "somente se sua rodada estiver ativa"
+    - Conceitos de cores: a partir do segundo parágrafo está errado.
 
 - Feedback geral: fregueses chegam durante uma rodada ativa e são coloridos com a cor da rodada. Quando métricas são coletadas, o freguês que originou a métrica tem que ser da mesma cor da rodada atual ou a métrica é descartada. Fregeueses continuam no sistema normalmente e são sempre computados nas métricas que envolvem número de fregueses no sistema. Quando rodada nova começa, uma nova cor os fregueses presentes de outras cores são estado inicial para a nova rodada. Na implementação, tenho a impressão que estes conceitos não estão seguidos à risca, seguindo o português do texto. Há que checar a implementação e verificar o código. Como há erro nos cálculos de E[N] e E[Nq] para as duas filas, deve haver um erro conceitual.
     - Não está claro o que determina a fila da rodada: se coletas na fila 1, se coletas na fila 2
     - Quando uma rodada é determinada, as estatísticas da rodada são dos fregueses servidos durante a rodada ativa. Após o término da rodada, fregueses da cor da rodada que acabou de terminar permanecem no sistema, mas suas estatísticas não são mais usadas após o término da rodada. Checar isso
     - Cálculo de E[N] e E[Nq]: nada comentado e há erro nisso, ou simplesmente usaram E[W] e E[T]. Todavia isso não deveria ser assim. Os resultados dos cálculos da simualação guardam as métricas e elas estariam aproximadamente satisfazendo Little. Fácil ver que isso não foi observado nos resultados, demonstrando que E[N] e E[Nq] deem ter sido de fato calculados entre erro de implementação
+    - O simulador está recebendo cliente, e aparentemente guardando estatísticas de todos estes clientes, independemente se saíram do sistema antes ou depois que sua rodada (mesma cor) terminou
+    - No relatório é dito que a rodada tem um número de coletas. Acho que o que está sendo feito é determinar o número de chegadas para uma rodada e depois simplesmente trocar a cor. As estatísticas E[N] e E[Nq], que envolvem cálculo de área ou cálculo de pmf (que vai ser equivalente à área), tem que ser achados nos instantes dos eventos de chegada e fim do serviço, quando pode haver alterações no fator. Não existe comentário sobre isso e os resultados destas métricas estão errados.
+    - Uma rodada deve terminar quando o número de coletas em seus de sumiço na fila 2, a maior crítica, tiver alcançado o valor definido como tamanho da rodada. Isso é o certo
+    - Este trabalho tem que deduzir as expressões para E[W1], E[T1], E[Nq1], E[N1], V(W1) e E[W2], E[T2], E[Nq2], E[N2]. Tabelar estes resultados para os valores diferentes de rho. Apresentar os resultados da simulação com estes valores calculados e dentro dos ICs de 95% com 5% de precisão.
+    - Nas estimativa de fase transiente, são plotados gráfico para V(N1), V(Nq1), V(N2) e V(Nq2), que não são métricas solicitadas nesse trabalho. Isso é muito estranho e acho que há algo a ser explicado.
 
 - Email:
 Os resultados envolvendo N e Nq, tanto da fila 1 como da fila 2, estão errados. As deduções dos valores analíticos para as métricas das médias para as duas filas devem estar no trabalho e V(W1) que pode ser obtido também. Para as variâncias o número mínimo de rodadas para uma precisão de 5% no IC de 95% é da ordem de 3300, como temos na aula 7 e apostila.
